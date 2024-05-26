@@ -31,9 +31,10 @@ describe("Operaciones CRUD de cafes", () => {
     it("Get 400 status code with a different id path", async () => {
         const newId = 2
         const testObject = {
-            id: `${newId}`,
+            id: `${newId}+1`,
             nombre: "café prueba"
         }
-        const {statusCode, body} = await request(server).put(`/cafes/${newId}+1`).send(testObject)
+        const {statusCode} = await request(server).put(`/cafes/${newId}`).send(testObject)
+        expect(statusCode).toBe(400)
     })
 });
